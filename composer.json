@@ -1,0 +1,25 @@
+{
+    "license": "MIT",
+	"authors": [
+        {
+            "name": "Oleg Postoev",
+            "email": "mr.postoev@yandex.ru",
+            "homepage": "http://postoev.ru",
+            "role": "Developer"
+        }
+    ],
+	"require": {
+        "php": ">=5.3.0"
+    },
+	"repositories": [
+        {
+            "type": "git",
+            "url": "http://github.com/Dok11/BX"
+        }
+    ],
+    "autoload": {
+		"psr-4": {
+			"Dok\\BX": "classes/"
+		}
+    }
+}
