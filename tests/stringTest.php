@@ -54,6 +54,25 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	
 	
 	/**
+	 * Тест на перевод даты в человеческий формат
+	 * @dataProvider providerGetStringFormatDateHuman
+	 */
+	public function testGetStringFormatDateHuman($date, $format, $result) {
+		$string = new \Dok\BX\String();
+		
+		$string->setSource($date);
+		$this->assertEquals($result, $string->getStringFormatDateHuman($format));
+	}
+	
+	public function providerGetStringFormatDateHuman() {
+		return Array(
+			Array('18.02.2015', 'DD MMMM YYYY', '18&nbsp;февраля&nbsp;2015'),
+			Array('22.12.2011', 'DD MMMM YYYY', '22&nbsp;декабря&nbsp;2011'),
+		);
+	}
+	
+	
+	/**
 	 * Тест на формирование ссылок из текста
 	 */
 	public function testGetStringLink() {
