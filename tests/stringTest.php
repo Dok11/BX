@@ -24,25 +24,32 @@ class StringTest extends \PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Тест на правильное определение окончаний
+	 * @dataProvider providerGetStringEnding
 	 */
-	public function testGetStringEnding() {
+	public function testGetStringEnding($num, $arStringEnds, $res) {
 		$string = new \Dok\BX\String();
+		
+		$this->assertEquals($res, $string->getStringEnding($num, $arStringEnds));
+		
+	}
 	
+	public function providerGetStringEnding() {
 		$arStringEnds = Array('рубль', 'рубля', 'рублей');
 		
-		$this->assertEquals('рубль', $string->getStringEnding(1, $arStringEnds));
-		$this->assertEquals('рубль', $string->getStringEnding(21, $arStringEnds));
-		$this->assertEquals('рубль', $string->getStringEnding(31, $arStringEnds));
-		
-		$this->assertEquals('рубля', $string->getStringEnding(2, $arStringEnds));
-		$this->assertEquals('рубля', $string->getStringEnding(22, $arStringEnds));
-		$this->assertEquals('рубля', $string->getStringEnding(33, $arStringEnds));
-		
-		$this->assertEquals('рублей', $string->getStringEnding(5, $arStringEnds));
-		$this->assertEquals('рублей', $string->getStringEnding(11, $arStringEnds));
-		$this->assertEquals('рублей', $string->getStringEnding(12, $arStringEnds));
-		$this->assertEquals('рублей', $string->getStringEnding(35, $arStringEnds));
-		
+		return Array(
+			Array(1,	$arStringEnds, 'рубль'),
+			Array(21,	$arStringEnds, 'рубль'),
+			Array(31,	$arStringEnds, 'рубль'),
+			
+			Array(2,	$arStringEnds, 'рубля'),
+			Array(22,	$arStringEnds, 'рубля'),
+			Array(33,	$arStringEnds, 'рубля'),
+			
+			Array(5,	$arStringEnds, 'рублей'),
+			Array(11,	$arStringEnds, 'рублей'),
+			Array(12,	$arStringEnds, 'рублей'),
+			Array(35,	$arStringEnds, 'рублей'),
+		);
 	}
 	
 	
