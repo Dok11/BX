@@ -40,6 +40,7 @@ final class BitrixCoreSeeker {
 
 		$_SERVER['DOCUMENT_ROOT'] = $docRoot;
 		$_SERVER['SCRIPT_NAME'] = realpath($_SERVER['SCRIPT_NAME']);
+		$GLOBALS['__IGNORE_VENDOR'] = true;
 	}
 
 }
