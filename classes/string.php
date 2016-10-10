@@ -1,6 +1,6 @@
 <?php
 
-namespace Dok\bx;
+namespace Dok\BX;
 
 class String {
 	

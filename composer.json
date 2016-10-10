@@ -1,5 +1,5 @@
 {
-	"name": "Dok/bx",
+	"name": "dok/bx",
 	"type" : "library",
 	"description" : "Bitrix help library",
 	"keywords" : [ "bitrix", "1c-bitrix", "helper"],
@@ -23,7 +23,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Dok\\bx": "classes/"
+			"Dok\\BX": "classes/"
 		}
 	}
 }
