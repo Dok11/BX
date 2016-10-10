@@ -1,29 +1,29 @@
 {
-	"name": "Dok/BX",
+	"name": "Dok/Bx",
 	"type" : "library",
 	"description" : "Bitrix help library",
 	"keywords" : [ "bitrix", "1c-bitrix", "helper"],
-    "license": "MIT",
+	"license": "MIT",
 	"authors": [
-        {
-            "name": "Oleg Postoev",
-            "email": "mr.postoev@yandex.ru",
-            "homepage": "http://postoev.ru",
-            "role": "Developer"
-        }
-    ],
-	"require": {
-        "php": ">=5.3.0"
-    },
-	"repositories": [
-        {
-            "type": "git",
-            "url": "http://github.com/Dok11/BX"
-        }
-    ],
-    "autoload": {
-		"psr-4": {
-			"Dok\\BX": "classes/"
+		{
+			"name": "Oleg Postoev",
+			"email": "mr.postoev@yandex.ru",
+			"homepage": "http://postoev.ru",
+			"role": "Developer"
 		}
-    }
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"repositories": [
+		{
+			"type": "git",
+			"url": "http://github.com/Dok11/BX"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Dok\\Bx": "classes/"
+		}
+	}
 }
