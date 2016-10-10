@@ -110,16 +110,23 @@ class String {
 
 
 		// Определение формата даты
-		$sFormat = 'DD MMMM YYYY в HH:MI';
+		$arLangFormat = Array(
+			'formatDateHuman__default'		=> 'DD MMMM YYYY в HH:MI',
+			'formatDateHuman__today'		=> 'Сегодня в HH:MI',
+			'formatDateHuman__yesterday'	=> 'Вчера в HH:MI',
+			'formatDateHuman__thisYear'		=> 'DD MMMM в HH:MI',
+		);
+		
+		$sFormat = $arLangFormat['formatDateHuman__default'];
 
 		if($iDateDayNum === $iNowDayNum) {
-			$sFormat = 'Сегодня в HH:MI';
+			$sFormat = $arLangFormat['formatDateHuman__today'];
 
 		} elseif($iDateDayNum === $iNowDayNum-1) {
-			$sFormat = 'Вчера в HH:MI';
+			$sFormat = $arLangFormat['formatDateHuman__yesterday'];
 
 		} elseif($arDate['YYYY'] == date('Y')) {
-			$sFormat = 'DD MMMM в HH:MI';
+			$sFormat = $arLangFormat['formatDateHuman__thisYear'];
 
 		}
 		// ---------------------------------------------------------------------
