@@ -1,2 +1,4 @@
 /nbproject/project.properties
 /nbproject/project.xml
+/vendor
+composer.lock
