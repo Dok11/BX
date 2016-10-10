@@ -1,5 +1,8 @@
 {
-	"name": "Dok\\BX",
+	"name": "Dok/BX",
+	"type" : "library",
+	"description" : "Bitrix help library",
+	"keywords" : [ "bitrix", "1c-bitrix", "helper"],
     "license": "MIT",
 	"authors": [
         {
