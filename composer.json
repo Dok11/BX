@@ -15,12 +15,6 @@
 	"require": {
 		"php": "^5.3"
 	},
-	"repositories": [
-		{
-			"type": "git",
-			"url": "http://github.com/Dok11/BX"
-		}
-	],
 	"autoload": {
 		"psr-4": {
 			"Dok\\BX\\": "classes/"
