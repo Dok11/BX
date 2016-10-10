@@ -1,6 +1,6 @@
 <?php
 
-namespace Dok\Bx;
+namespace Dok\bx;
 
 class Http {
 	
