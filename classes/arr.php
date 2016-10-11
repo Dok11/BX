@@ -97,6 +97,31 @@ class Arr {
 		return $result;
 		
 	}
+	
+	
+	/**
+	 * Метод вычисляет на сколько процентов первый массив похож на второй по значениям
+	 * @param array $arTarget Массив с которым идет сравнение
+	 * @return int Число в диапазоне 0-100
+	 */
+	public function getArrIntersectPercent($arTarget) {
+		if(!is_array($arTarget)) {return;}
+		
+		$iSourceCount		= count($this->source);
+		$arIntersect		= array_intersect($this->source, $arTarget);
+		$arIntersectCount	= count($arIntersect);
+		
+		if($arIntersectCount > 0) {
+			$iPercentage = round($arIntersectCount / $iSourceCount * 100);
+			
+		} else {
+			$iPercentage = 0;
+			
+		}
+		
+		return (int) $iPercentage;
+		
+	}
 
 
 	// =========================================================================
@@ -132,6 +157,23 @@ class Arr {
 		
 		$arr->setSource($arIn);
 		$result = $arr->getArrFindInArr($sFieldName, $sSearchVal, $sNeededFieldVal);
+
+		return $result;
+		
+	}
+	
+	
+	/**
+	 * Функция вычисляет на сколько процентов первый массив похож на второй по значениям
+	 * @param array $arSource Исходный массив
+	 * @param array $arTarget Массив с которым идет сравнение
+	 * @return int Число в диапазоне 0-100
+	 */
+	static function getIntersectPercent($arSource, $arTarget) {
+		$arr = new self();
+		
+		$arr->setSource($arSource);
+		$result = $arr->getArrIntersectPercent($arTarget);
 
 		return $result;
 		

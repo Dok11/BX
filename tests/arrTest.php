@@ -47,6 +47,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 				Array(Array(1, 2, 3, 4, 5))
 			),
 		);
+		
 	}
 	
 	
@@ -89,6 +90,32 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 			Array($arSourceArray, 'NAME',	'Zena',		'COUNTRY',	false),
 			Array($arSourceArray, 'AGE',	'Zena',		'COUNTRY',	false),
 			Array($arSourceArray, 'NAME',	'Arnold',	null,		2),
+		);
+		
+	}
+	
+	
+	/**
+	 * Тест вычисления сходства массивов
+	 * @dataProvider providerGetArrIntersectPercent
+	 */
+	public function testGetArrIntersectPercent($src, $target, $res) {
+		$arr = new \Dok\BX\Arr();
+		
+		$arr->setSource($src);
+		$this->assertEquals($res, $arr->getArrIntersectPercent($target));
+		
+	}
+	
+	public function providerGetArrIntersectPercent() {
+		return Array(
+			Array(Array(1), Array(1), 100),
+			Array(Array(0), Array(1), 0),
+			Array(Array(0, 1), Array(1), 50),
+			Array(Array(0, 1), Array(1, 2), 50),
+			Array(Array(0, 1), Array(1, 2, 3), 50),
+			Array(Array(0, 1, 2), Array(0), 33),
+			Array(Array(0), Array(0, 1, 2), 100),
 		);
 		
 	}
