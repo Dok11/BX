@@ -119,5 +119,64 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 		);
 		
 	}
+	
+	
+	/**
+	 * Тест вычисления сходства массивов по ключам
+	 * @dataProvider providerGetArrIntersectKeyPercent
+	 */
+	public function testGetArrIntersectKeyPercent($src, $target, $res) {
+		$arr = new \Dok\BX\Arr();
+		
+		$arr->setSource($src);
+		$this->assertEquals($res, $arr->getArrIntersectKeyPercent($target));
+		
+	}
+	
+	public function providerGetArrIntersectKeyPercent() {
+		return Array(
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				100
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				Array('KEY_1' => 1, 'KEY_2' => 2),
+				67
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				Array('KEY_1' => 1),
+				33
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2),
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				100
+			),
+			Array(
+				Array('KEY_1' => 1),
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				100
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2),
+				Array('KEY_2' => 2, 'KEY_3' => 3),
+				50
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2),
+				Array('KEY_2' => 2, 'KEY_3' => 3, 'KEY_4' => 3),
+				50
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2),
+				Array('KEY_3' => 3, 'KEY_4' => 3),
+				0
+			),
+		);
+		
+	}
 
 }
