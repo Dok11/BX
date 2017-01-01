@@ -40,7 +40,7 @@ class Http {
 	 * Метод устанавливает рабочий URL
 	 * @param string $url
 	 */
-	public function setUrk($url) {
+	public function setUrl($url) {
 		$this->url = $url;
 		
 	}
