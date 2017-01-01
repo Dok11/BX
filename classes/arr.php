@@ -147,6 +147,37 @@ class Arr {
 		return (int) $iPercentage;
 		
 	}
+	
+	
+	/**
+	 * Метод сводит два одномерных или двумерных массива к одному,
+	 * а дублирующие ключи превращаются в массивы
+	 * @param array $arNew Массив назначения
+	 */
+	public function getArrMergeExt($arNew) {
+		$arResult = $this->source;
+
+		foreach($this->source as $fieldKey=>$fieldValue) {
+			if(is_array($fieldValue) && is_array($arNew[$fieldKey])) {
+				$arResult[$fieldKey] = array_merge($fieldValue, $arNew[$fieldKey]);
+				
+			} elseif(is_array($fieldValue) && !is_array($arNew[$fieldKey])) {
+				$arResult[$fieldKey][] = $arNew[$fieldKey];
+				
+			} elseif(is_array($arNew[$fieldKey]) && !is_array($fieldValue)) {
+				$arResult[$fieldKey][] = $fieldValue;
+				$arResult[$fieldKey] = $arNew[$fieldKey];
+				
+			} elseif(is_array($arNew) && $fieldValue !== $arNew[$fieldKey]) {
+				$arResult[$fieldKey] = Array($fieldValue, $arNew[$fieldKey]);
+				
+			}
+
+		}
+		
+		return $arResult;
+		
+	}
 
 
 	// =========================================================================
@@ -216,6 +247,23 @@ class Arr {
 		
 		$arr->setSource($arSource);
 		$result = $arr->getArrIntersectKeyPercent($arTarget);
+
+		return $result;
+		
+	}
+	
+	
+	/**
+	 * Функция сводит два одномерных или двумерных массива к одному,
+	 * а дублирующие ключи превращаются в массивы
+	 * @param array $arSource Массив источник
+	 * @param array $arTarget Массив назначения (не ссылка)
+	 */
+	static function getMergeExt($arSource, $arTarget) {
+		$arr = new self();
+		
+		$arr->setSource($arSource);
+		$result = $arr->getArrMergeExt($arTarget);
 
 		return $result;
 		

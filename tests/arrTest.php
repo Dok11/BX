@@ -178,5 +178,41 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 		);
 		
 	}
+	
+	
+	/**
+	 * Тест объединения массивов
+	 * @dataProvider providerGetArrMergeExt
+	 */
+	public function testGetArrMergeExt($src, $target, $res) {
+		$arr = new \Dok\BX\Arr();
+		
+		$arr->setSource($src);
+		$this->assertEquals($res, $arr->getArrMergeExt($target));
+		
+	}
+	
+	public function providerGetArrMergeExt() {
+		return Array(
+			Array(
+				false,
+				false,
+				Array(),
+			),
+			Array(
+				Array('K1' => 1, 'K2'=>2),
+				false,
+				Array('K1' => 1, 'K2'=>2),
+			),
+			Array(
+				Array('KEY_1' => 1, 'KEY_2' => 2, 'KEY_3' => 3),
+				Array('KEY_1' => 2, 'KEY_2' => 3, 'KEY_3' => 4),
+				Array('KEY_1' => Array(1, 2), 'KEY_2' => Array(2, 3), 'KEY_3' => Array(3, 4)),
+			),
+			
+		);
+		
+	}
+
 
 }
