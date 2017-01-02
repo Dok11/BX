@@ -213,6 +213,105 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 		);
 		
 	}
+	
+	
+	/**
+	 * Тест сортировки массива
+	 * @dataProvider providerSortArrByField
+	 */
+	public function testSortArrByField($src, $field, $order, $res) {
+		$arr = new \Dok\BX\Arr();
+		
+		$arr->setSource($src);
+		$this->assertEquals($res, $arr->sortArrByField($field, $order));
+		
+	}
+	
+	public function providerSortArrByField() {
+		return Array(
+			// Прямая сортировка
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				'A', SORT_ASC,
+				Array(
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+			),
+			
+			// Обратная сортировка
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				'A', SORT_DESC,
+				Array(
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+				),
+			),
+			
+			// Неявная сортировка
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				'A', false,
+				Array(
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+			),
+			
+			// Без сортировки
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				'A', true,
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+			),
+			
+			// Сортировка по несуществующему ключу
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				'Z', false,
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+			),
+			
+			// Сортировка немассива
+			Array(
+				false, 'Z', false, null
+			),
+			
+		);
+		
+	}
 
 
 }

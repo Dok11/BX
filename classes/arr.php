@@ -178,8 +178,45 @@ class Arr {
 		return $arResult;
 		
 	}
+	
+	
+	/**
+	 * Метод сортирует двумерый массив по нужному полю
+	 * @param string $sField Ключ массива для сортировки
+	 * @param constant|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
+	 * @return array Отсортированный масиив
+	 */
+	public function sortArrByField($sField, $sortOrder=false) {
+		if(!$this->source) {return;}
+		
+		$arResult = $this->source;
 
+		$arSortData = Array();
 
+		foreach($this->source as $arItem) {
+			foreach($arItem as $keyField=>$valField) {
+				if($keyField == $sField) {
+					$arSortData[] = $valField;
+				}
+			}
+		}
+
+		if($arSortData) {
+			if($sortOrder) {
+				\array_multisort($arSortData, $sortOrder, $arResult);
+
+			} else {
+				\array_multisort($arSortData, $arResult);
+
+			}
+
+		}
+
+		return $arResult;
+		
+	}
+	
+	
 	// =========================================================================
 	// === СТАТИЧЕСКАЯ ОБВЯЗКА =================================================
 	// =========================================================================
@@ -264,6 +301,24 @@ class Arr {
 		
 		$arr->setSource($arSource);
 		$result = $arr->getArrMergeExt($arTarget);
+
+		return $result;
+		
+	}
+	
+	
+	/**
+	 * Функция сортирует двумерый массив по нужному полю
+	 * @param array $arSource Исходный массив
+	 * @param string $sField Ключ массива для сортировки
+	 * @param constant|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
+	 * @return array Отсортированный масиив
+	 */
+	static function sortByField($arSource, $sField, $sortOrder) {
+		$arr = new self();
+		
+		$arr->setSource($arSource);
+		$result = $arr->sortArrByField($sField, $sortOrder);
 
 		return $result;
 		
