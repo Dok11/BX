@@ -217,6 +217,45 @@ class Arr {
 	}
 	
 	
+	/**
+	 * Метод сортирует двумерый массив по наборю ключей
+	 * @param array $arFields Поля и направления сортировки
+	 * @return array Отсортированный масиив
+	 */
+	public function sortArrByFields($arFields) {
+		$arResult = $this->source;
+
+
+		// Определение массива определяющего сортировку
+		$arSortData = Array();
+		foreach($this->source as $arItem) {
+			foreach($arItem as $keyField=>$valField) {
+				if($arFields[$keyField]) {
+					$arSortData[$keyField][] = $valField;
+				}
+			}
+		}
+		// ---------------------------------------------------------------------
+
+
+		// Сортировка
+		if($arSortData) {
+			$arMultisort = Array();
+			foreach($arFields as $k=>$v) {
+				$arMultisort[] = '$arSortData["'.$k.'"], '.$v;
+			}
+			
+			eval('array_multisort('.implode(', ', $arMultisort).', $arResult);');
+
+		}
+		// ---------------------------------------------------------------------
+
+
+		return $arResult;
+
+	}
+	
+	
 	// =========================================================================
 	// === СТАТИЧЕСКАЯ ОБВЯЗКА =================================================
 	// =========================================================================
@@ -319,6 +358,23 @@ class Arr {
 		
 		$arr->setSource($arSource);
 		$result = $arr->sortArrByField($sField, $sortOrder);
+
+		return $result;
+		
+	}
+	
+	
+	/**
+	 * Функция сортирует двумерый массив по наборю ключей
+	 * @param array $arSource Исходный массив
+	 * @param array $arFields Поля и направления сортировки
+	 * @return array Отсортированный масиив
+	 */
+	static function sortByFields($arSource, $arFields) {
+		$arr = new self();
+		
+		$arr->setSource($arSource);
+		$result = $arr->sortArrByFields($arFields);
 
 		return $result;
 		

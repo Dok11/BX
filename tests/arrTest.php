@@ -313,5 +313,76 @@ class ArrTest extends \PHPUnit_Framework_TestCase {
 		
 	}
 
+	
+	/**
+	 * Тест сортировки массива
+	 * @dataProvider providerSortArrByFields
+	 */
+	public function testSortArrByFields($src, $fields, $res) {
+		$arr = new \Dok\BX\Arr();
+		
+		$arr->setSource($src);
+		$this->assertEquals($res, $arr->sortArrByFields($fields));
+		
+	}
+	
+	public function providerSortArrByFields() {
+		return Array(
+			// Прямая сортировка
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				Array(
+					'A' => SORT_ASC,
+				),
+				Array(
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+			),
+			
+			// Обратная сортировка
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+				),
+				Array(
+					'A' => SORT_DESC,
+				),
+				Array(
+					Array('A'=>31, 'B'=>11, 'C' => 22),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+				),
+			),
+			
+			// Сортировка по нескольким полям
+			Array(
+				Array(
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>10, 'B'=>11, 'C' => 22),
+				),
+				Array(
+					'A' => SORT_ASC,
+					'B' => SORT_DESC,
+				),
+				Array(
+					Array('A'=>10, 'B'=>41, 'C' => 16),
+					Array('A'=>10, 'B'=>11, 'C' => 22),
+					Array('A'=>11, 'B'=>21, 'C' => 12),
+				),
+			),
+			
+		);
+
+	}
+	
 
 }
