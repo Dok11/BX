@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
+<phpunit bootstrap="tests/bootstrap.php"
+		 backupGlobals="false"
+         backupStaticAttributes="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         syntaxCheck="false"
+         verbose="true">
 	<testsuites>
 		<testsuite name="TestSuite">
 			<file>tests/arrTest.php</file>
 			<file>tests/stringTest.php</file>
+			<file>tests/iblockTest.php</file>
 		</testsuite>
 	</testsuites>
 </phpunit>
