@@ -78,6 +78,9 @@ class El {
 		$this->isModuleInclude = \Bitrix\Main\Loader::includeModule('iblock');
 		
 		$this->order		= Array('ID' => 'ASC');
+		$this->filter		= Array();
+		$this->nav			= false;
+		$this->group		= false;
 		$this->select		= Array('IBLOCK_ID', 'ID');
 		$this->getMethod	= 'fetch';
 
@@ -128,6 +131,10 @@ class El {
 			
 			$this->filter = $arParams['FILTER'];
 			
+		}
+		
+		if($this->iblockId) {
+			$this->filter['IBLOCK_ID'] = $this->iblockId;
 		}
 		
 	}
