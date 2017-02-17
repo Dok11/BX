@@ -9,7 +9,7 @@ class IbTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider providerGetByCode
 	 */
 	public function testGetByCode($code, $res) {
-		$ib = new \Dok\BX\Iblock();
+		$ib = new \Dok\BX\InfoBlock\Main();
 		$this->assertEquals($res, $ib->getIblockByCode($code));
 		
 	}

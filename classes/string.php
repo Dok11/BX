@@ -28,7 +28,7 @@ class String {
 	
 	/**
 	 * Метод возвращает исходное значение строки
-	 * @param string $source
+	 * @return string $source
 	 */
 	public function getSource() {
 		return $this->source;
@@ -103,7 +103,6 @@ class String {
 	 * Метод превращает прошедшую дату в формате сайта в человеческий вид
 	 * Возвращает время, если дата соответствует сегодняшней
 	 * Возвращает только время, дату, месяц, если дата текущего года
-	 * @param string $date Дата в формате сайта
 	 * @return string Дата в отформатированном виде
 	 */
 	public function getStringFormatDateHumanBack() {
@@ -152,7 +151,7 @@ class String {
 	
 	/**
 	 * Метод возвращает число в формате суммы
-	 * @param string $decimal Число знаков после запятой, например, не более двух
+	 * @param int $decimal Число знаков после запятой, например, не более двух
 	 * @param string $groupDiv Разделитель разрядов
 	 * @param string $fractionDiv Разделитель дробных значений
 	 * @return string
@@ -283,8 +282,8 @@ class String {
 
 	/**
 	 * Метод возвращает число в формате суммы
-	 * @param type $number Число для вывода суммы
-	 * @param string $decimal Число знаков после запятой, например, не более двух
+	 * @param int $number Число для вывода суммы
+	 * @param int $decimal Число знаков после запятой, например, не более двух
 	 * @param string $groupDiv Разделитель разрядов
 	 * @param string $fractionDiv Разделитель дробных значений
 	 * @return string

@@ -21,7 +21,7 @@ class Arr {
 	
 	/**
 	 * Метод возвращает исходный массив
-	 * @param string $source
+	 * @return string $source
 	 */
 	public function getSource() {
 		return $this->source;
@@ -31,13 +31,13 @@ class Arr {
 	
 	/**
 	 * Метод устанавливает исходный массив
-	 * @param string $source
+	 * @param array|string $source
 	 */
 	public function setSource($source=Array()) {
 		if(is_array($source)) {
 			$this->source = $source;
 		} else {
-			$this->source = Array();
+			$this->source = Array($source);
 		}
 		
 	}
@@ -83,6 +83,7 @@ class Arr {
 	 * @param string $sFieldName Имя ключа, по которому ищем
 	 * @param string $sSearchVal Искомое значение
 	 * @param string $sNeededFieldVal Значение какого поля нужно вернуть, если null - вернется ключ массива
+	 * @return mixed
 	 */
 	public function getArrFindInArr($sFieldName, $sSearchVal, $sNeededFieldVal='ID') {
 		$result = array_search(
@@ -97,6 +98,29 @@ class Arr {
 		return $result;
 		
 	}
+
+
+	/**
+	 * Метод переводит ассоциативный массив в строку с атрибутами html-элемента
+	 * @return string
+	 */
+	public function getArrHtmlAttr() {
+		$result = '';
+
+		foreach($this->source as $field=>$value) {
+			if($value === true) {
+				$result .= $field.' ';
+
+			} else {
+				$result .= $field.'="'. \htmlspecialchars($value) .'" ';
+
+			}
+
+		}
+
+		return \trim($result);
+
+	}
 	
 	
 	/**
@@ -105,7 +129,7 @@ class Arr {
 	 * @return int Число в диапазоне 0-100
 	 */
 	public function getArrIntersectPercent($arTarget) {
-		if(!is_array($arTarget)) {return;}
+		if(!is_array($arTarget)) {return null;}
 		
 		$iSourceCount		= count($this->source);
 		$arIntersect		= array_intersect($this->source, $arTarget);
@@ -130,7 +154,7 @@ class Arr {
 	 * @return int Число в диапазоне 0-100
 	 */
 	public function getArrIntersectKeyPercent($arTarget) {
-		if(!is_array($arTarget)) {return;}
+		if(!is_array($arTarget)) {return null;}
 		
 		$iSourceCount		= count($this->source);
 		$arIntersect		= array_intersect_key($this->source, $arTarget);
@@ -153,6 +177,7 @@ class Arr {
 	 * Метод сводит два одномерных или двумерных массива к одному,
 	 * а дублирующие ключи превращаются в массивы
 	 * @param array $arNew Массив назначения
+	 * @return array
 	 */
 	public function getArrMergeExt($arNew) {
 		$arResult = $this->source;
@@ -183,11 +208,11 @@ class Arr {
 	/**
 	 * Метод сортирует двумерый массив по нужному полю
 	 * @param string $sField Ключ массива для сортировки
-	 * @param constant|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
+	 * @param int|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
 	 * @return array Отсортированный масиив
 	 */
 	public function sortArrByField($sField, $sortOrder=false) {
-		if(!$this->source) {return;}
+		if(!$this->source) {return null;}
 		
 		$arResult = $this->source;
 
@@ -283,6 +308,7 @@ class Arr {
 	 * @param string $sFieldName Имя ключа, по которому ищем
 	 * @param string $sSearchVal Искомое значение
 	 * @param string $sNeededFieldVal Значение какого поля нужно вернуть, если null - вернется ключ массива
+	 * @return mixed
 	 */
 	static function getFindInArr($arIn, $sFieldName, $sSearchVal, $sNeededFieldVal='ID') {
 		$arr = new self();
@@ -292,6 +318,22 @@ class Arr {
 
 		return $result;
 		
+	}
+
+
+	/**
+	 * Функция переводит ассоциативный массив в строку с атрибутами html-элемента
+	 * @param array $arIn Ассоциативный массив
+	 * @return string
+	 */
+	static function getHtmlAttr($arIn) {
+		$arr = new self();
+
+		$arr->setSource($arIn);
+		$result = $arr->getArrHtmlAttr();
+
+		return $result;
+
 	}
 	
 	
@@ -334,6 +376,7 @@ class Arr {
 	 * а дублирующие ключи превращаются в массивы
 	 * @param array $arSource Массив источник
 	 * @param array $arTarget Массив назначения (не ссылка)
+	 * @return array
 	 */
 	static function getMergeExt($arSource, $arTarget) {
 		$arr = new self();
@@ -350,7 +393,7 @@ class Arr {
 	 * Функция сортирует двумерый массив по нужному полю
 	 * @param array $arSource Исходный массив
 	 * @param string $sField Ключ массива для сортировки
-	 * @param constant|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
+	 * @param int|bool $sortOrder Порядок для сортировки SORT_ASC|SORT_DESC|false
 	 * @return array Отсортированный масиив
 	 */
 	static function sortByField($arSource, $sField, $sortOrder) {

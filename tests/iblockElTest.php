@@ -9,7 +9,7 @@ class IblockElTest extends \PHPUnit_Framework_TestCase {
 	 * @dataProvider providerGetByCode
 	 */
 	public function testGetByCode($params, $res) {
-		$el = new \Dok\BX\Iblock\El();
+		$el = new \Dok\BX\InfoBlock\El();
 		$this->assertEquals($res, $el->getElList($params));
 		
 	}
